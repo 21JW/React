@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+        // build a component
+        class Weather extends React.Component
+        {
+            constructor(props)
+            {
+                super(props)
+                this.state={isRainy:false}
+            }
+            render()
+            {
+                // don't write it as demo(),otherwise it returns the value that demo() returns
+                return <h2 onClick={demo}>Today is {this.state.isRainy?'rainy.':'sunny.'}</h2>
+            }
+        }
+        ReactDOM.render(<Weather/>,document.getElementById("test"));
+        // 1.React finds MyComponent
+        // 2.React realizes this component is defined by class, then creates a prototye of this class.
+        // 3.turn a virtual DOM into a real DOM
+        function demo()
+        {
+            alert("well done");
+        }
+    </script>
+</body>
+</html>
