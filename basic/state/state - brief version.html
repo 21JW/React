@@ -18,25 +18,31 @@
         // build a component
         class Weather extends React.Component
         {
-            constructor(props)
-            {
-                super(props)
-                this.state={isRainy:false}
-            }
+            state={isRainy:false};
+
             render()
+            // it is used 1+n times
+            // n means the times that state changes
             {
-                // don't write it as demo(),otherwise it returns the value that demo() returns
-                return <h2 onClick={demo}>Today is {this.state.isRainy?'rainy.':'sunny.'}</h2>
+                // 1.don't write it as changeWeather(),otherwise it returns the value that changeWeather() returns
+                return <h2 onClick={this.changeWeather}>Today is {this.state.isRainy?'rainy.':'sunny.'}</h2>
             }
+            
+            changeWeather=()=>
+            // executes when you click
+            {
+                // get isRainy state
+               const isRainy=this.state.isRainy;
+               // state should be changed by setState()   
+               this.setState({isRainy:!isRainy});
+            }
+
         }
         ReactDOM.render(<Weather/>,document.getElementById("test"));
         // 1.React finds MyComponent
         // 2.React realizes this component is defined by class, then creates a prototye of this class.
         // 3.turn a virtual DOM into a real DOM
-        function demo()
-        {
-            alert("well done");
-        }
+      
     </script>
 </body>
 </html>
