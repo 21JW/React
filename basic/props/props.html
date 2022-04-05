@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+        // import PropType from "prop-types";
+        class Person extends React.Component
+        {
+            render()
+            {
+                // return(
+                //     <ul>
+                //         <li>Name: {this.props.name}</li>
+                //         <li>Age: {this.props.age}</li>
+                //         <li>Gender: {this.props.gender}</li>
+                //     </ul>
+                // )
+                
+                // another way:
+                const {name,age,gender}=this.props;
+                return(
+                     <ul>
+                         <li>Name: {name}</li>
+                         <li>Age: {age+1}</li>
+                         <li>Gender: {gender}</li>
+                     </ul>
+                )
+            }
+        }
+    // Person.propTypes=
+    // {
+    //     name:PropTypes.string.isrequired,
+    //     sex:PropTypes.string,
+    //     age:propTypes.number,
+    // }    
+    ReactDOM.render(<Person name="KD" age={30} gender="Male"/>,document.getElementById("test1"));
+    ReactDOM.render(<Person name="MJ" age={35} gender="Male"/>,document.getElementById("test2")); 
+    // another way to write information
+    const p3={name:"EW",age:27,gender:"Female"};
+    ReactDOM.render(<Person {...p3}/>,document.getElementById("test3"));
+
+    </script>
+</body>
+</html>
