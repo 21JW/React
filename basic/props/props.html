@@ -17,10 +17,24 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
     <!-- translate JSX into JS -->
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
     <script type="text/babel">
-        // import PropType from "prop-types";
+   
         class Person extends React.Component
         {
+            static propTypes=
+            {
+                name:PropTypes.string.isRequired,
+                age:PropTypes.number,
+                gender:PropTypes.string,
+            }
+            
+            static defaultProps=
+            {
+                gender:"Male",
+                age:18,
+            }
+
             render()
             {
                 // return(
@@ -42,14 +56,10 @@
                 )
             }
         }
-    // Person.propTypes=
-    // {
-    //     name:PropTypes.string.isrequired,
-    //     sex:PropTypes.string,
-    //     age:propTypes.number,
-    // }    
+
     ReactDOM.render(<Person name="KD" age={30} gender="Male"/>,document.getElementById("test1"));
-    ReactDOM.render(<Person name="MJ" age={35} gender="Male"/>,document.getElementById("test2")); 
+    // use the default gender
+    ReactDOM.render(<Person name="MJ" age={35} />,document.getElementById("test2")); 
     // another way to write information
     const p3={name:"EW",age:27,gender:"Female"};
     ReactDOM.render(<Person {...p3}/>,document.getElementById("test3"));
