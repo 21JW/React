@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+   
+        class Demo extends React.Component
+        {
+            display1=()=>
+            {
+                const{input1}=this
+                // similar to getElementbyID
+                alert(input1.value)
+            }
+
+            display2=()=>
+            {
+                const{input2}=this
+                alert(input2.value)
+            }
+
+
+            render()
+            {
+                return(
+                     <div>
+                        <input ref={(currentNode)=>{this.input1=currentNode}} type="text" placeholder="Please write something"/>&nbsp;
+                        <button onClick={this.display1}>display the content on the left</button>&nbsp;
+                        <input ref={(currentNode)=>{this.input2=currentNode}} onBlur={this.display2} type="text" placeholder="display content after blur moves"/>
+                     </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Demo/>,document.getElementById("test"));
+
+    </script>
+</body>
+</html>
