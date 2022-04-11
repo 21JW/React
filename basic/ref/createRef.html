@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+   
+        class Demo extends React.Component
+        {
+            // create a container and name it as myRef1
+            myRef1=React.createRef();
+            myRef2=React.createRef();
+
+            display1=()=>
+            {
+                alert(this.myRef1.current.value);
+            }
+
+            display2=()=>
+            {
+                alert(this.myRef2.current.value);
+            }
+
+
+            render()
+            {
+                return(
+                     <div>
+                        <input ref={this.myRef1} type="text" placeholder="Please write something"/>&nbsp;
+                        <button onClick={this.display1}>display the content on the left</button>&nbsp;
+                        <input ref={this.myRef2} onBlur={this.display2} type="text" placeholder="display content after blur moves"/>
+                     </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Demo/>,document.getElementById("test"));
+
+    </script>
+</body>
+</html>
