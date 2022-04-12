@@ -18,37 +18,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
     <script type="text/babel">
    
-        class Demo extends React.Component
+        class Login extends React.Component
         {
-            // create a container and name it as myRef1
-            myRef1=React.createRef();
-            myRef2=React.createRef();
-
-            display1=()=>
+            submit=(event)=>
             {
-                alert(this.myRef1.current.value);
-            }
-
-            display2=(event)=>
-            {
-                alert(event.target.value);
+                event.preventDefault()
+                // prevent from restarting 
+                const{username,password}=this;
+                alert(`The username is: ${username.value}, the password is ${password.value}.`);
             }
 
             render()
             {
                 return(
-                     <div>
-                        <input ref={this.myRef1} type="text" placeholder="Please write something"/>&nbsp;
-                        <button onClick={this.display1}>display the content on the left</button>&nbsp;
-                        {/*<input ref={this.myRef2} onBlur={this.display2} type="text" placeholder="display content after blur moves"/>*/}
-                        {/* it is ok not to use ref, since the object is the same*/}
-                        <input onBlur={this.display2} type="text" placeholder="display content after blur moves"/>
-                     </div>
+                    <form onSubmit={this.submit}>
+                        Username: <input ref={currentNode=>this.username=currentNode} type="text" name="username"/>&nbsp;
+                        Password: <input ref={currentNode=>this.password=currentNode} type="text" name="password"/>&nbsp;
+                        <button>login</button>
+                    </form>
                 )
             }
         }
 
-        ReactDOM.render(<Demo/>,document.getElementById("test"));
+        ReactDOM.render(<Login/>,document.getElementById("test"));
 
     </script>
 </body>
