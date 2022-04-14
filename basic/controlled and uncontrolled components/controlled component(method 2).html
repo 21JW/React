@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+   
+// controlled components save data to state instead of a component created by ref   
+        class Login extends React.Component
+        {
+            // initialize state
+            state=
+            {
+                username:"",
+                password:""
+            }
+
+            // save data to state
+            // return a function
+            saveFormData=(dataType,event)=>
+                {
+                    // use[]:for example, let a="name" let obj={} obj[a]="Tom"; it can assign Tom to obj's name,
+                    this.setState({[dataType]:event.target.value})
+                }
+
+            submit=(event)=>
+            {
+                event.preventDefault()
+                // prevent from restarting 
+                const{username,password}=this.state;
+                alert(`The username is: ${username}, the password is ${password}.`);
+            }
+
+            render()
+            {
+                return(
+                    <form onSubmit={this.submit}>
+                        Username: <input onChange={(event)=>{this.saveFormData("username",event)}} type="text" name="username"/>&nbsp;
+                        Password: <input onChange={(event)=>{this.saveFormData("password",event)}} type="text" name="password"/>&nbsp;
+                        <button>login</button>
+                    </form>
+                )
+            }
+        }
+
+        ReactDOM.render(<Login/>,document.getElementById("test"));
+
+    </script>
+</body>
+</html>
