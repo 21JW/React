@@ -17,32 +17,57 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
     <script type="text/babel">
-   
+      
         class Life extends React.Component
         {
-            state=
-            {
-                opacity:1
-            }
 
+            state={opacity:1};
+
+            //self-created fucnction to unmount a component
             unmountComponent=()=>
             {
                 ReactDOM.unmountComponentAtNode(document.getElementById("test"));
             }
 
+            // executes once
+            componentDidMount()
+            {
+                this.timer=setInterval(()=>
+                {
+                    // get the original state
+                    let{opacity}=this.state;
+                    // opacity decrease by 0.1
+                    opacity=opacity-0.1;
+                    // if opacity is lower than 0, opacity becomes 1 again
+                    if(opacity<=0)
+                    {
+                        opacity=1;
+                    }
+                    // set opacity
+                    this.setState({opacity})
+                },200);
+                // alert("this is componentDidMount"); 
+                // the sentence above shown only once, which proves componentDidMount executes only once
+            }
+
+            // executes before component is unmounted
+            componentWillUnmount() 
+            {
+                clearInterval(this.timer);
+            }
+
             render()
             {
-                return
-                (
+                return(
                     <div>
                         <h2 style={{opacity:this.state.opacity}}>I am changing.</h2>
-                        <button onclick={this.unmountComponent}>unmount sentence above</button>
+                        <button onClick={this.unmountComponent}>unmount this component</button>
                     </div>
                 )
             }
         }
-
         ReactDOM.render(<Life/>,document.getElementById("test"));
+
     </script>
 </body>
 </html>
