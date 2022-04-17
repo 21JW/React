@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+
+        {/*mount order: constructor componentWillMount render componentDidMount render componentWillUnmount*/}
+        {/*setState order: shouldComponentUpdate componentWillUpdate render componentDidUpdate*/}
+        {/*forceUpdate order: componentWillUpdate render componentDidUpdate*/}
+
+      
+        class Count extends React.Component
+        {
+            constructor(props)
+            {
+                console.log("Count-constructor");
+                super(props)
+                // initialize state
+                this.state={count:0}
+            }
+
+            add=()=>
+            {
+                const{count}=this.state;
+                this.setState({count:count+1});
+            }
+
+            // forceUpdate function
+            force=()=>
+            {
+                this.forceUpdate();
+            }
+
+            //self-created fucnction to unmount a component
+            unmountComponent=()=>
+            {
+                ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+            }
+
+            // executes once
+            componentDidMount()
+            {
+                console.log("Count-componentDidMount");
+            }
+
+            componentWillMount() 
+            {
+                console.log("Count-componentWillMount");
+            }
+
+            // judge whether it should be updated
+            shouldComponentUpdate()
+            {
+                console.log("Count-shouldComponentUpdate");
+                // return false; its not allowed to update this page
+                return true;
+            }
+
+            componentWillUpdate()
+            {
+                console.log("Count-componentWillUpdate");
+            }
+
+            componentDidUpdate()
+            {
+                console.log("Count-componentDidUpdate");
+            }
+
+            // executes before the component is unmounted
+            componentWillUnmount() 
+            {
+                console.log("Count-componentWillUnmount");
+            }
+
+            render()
+            {
+                console.log("Count-Render");
+                return(
+                    <div>
+                        {/* we can write it as  <h2>The sum is:{count}</h2>  if we add const{count}=this.state*/}
+                        <h2>The sum is:{this.state.count}</h2>
+                        <button onClick={this.add}>add by 1</button>
+                        <button onClick={this.unmountComponent}>unmount this component</button>
+                        <button onClick={this.force}>ForceUpdate without states changing</button>
+
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<Count/>,document.getElementById("test"));
+
+    </script>
+</body>
+</html>
