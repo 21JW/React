@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+      
+        class Parents extends React.Component
+        {
+
+           state={childName:"Jordan"};
+
+           changeName=()=>
+           {
+               this.setState({childName:"Young"})
+           }
+
+            render()
+            {
+                return(
+                    <div>
+                        <div>I am the Parent</div>
+                        <button onClick={this.changeName}>change child's name</button>
+                        <Children childName={this.state.childName}/>
+                    </div>
+                )
+            }
+        }
+
+        class Children extends React.Component
+        {
+            render()
+            {
+                console.log("Son-render");
+                return(
+                    <div>I am the son. My name is {this.props.childName}.</div>
+                )
+            }
+
+            // executes at the time that props updates
+            componentWillReceiveProps()
+            {
+                console.log("Son-componentWillReceiveProps");
+            }
+
+            shouldComponentUpdate()
+            {
+                console.log("Son-shouldComponentUpdate");
+                // return false; its not allowed to update this page
+                return true;
+            }
+
+            componentWillUpdate()
+            {
+                console.log("Son-componentWillUpdate");
+            }
+
+            componentDidUpdate()
+            {
+                console.log("Son-componentDidUpdate");
+            }
+
+            // executes before the component is unmounted
+            componentWillUnmount() 
+            {
+                console.log("Son-componentWillUnmount");
+            }
+
+        }
+        ReactDOM.render(<Parents/>,document.getElementById("test"));
+
+    </script>
+</body>
+</html>
