@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test"></div>
+
+    <!-- the core of React -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- enable react to control DOM -->
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <!-- translate JSX into JS -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js" rel="external nofollow" rel="external nofollow" ></script>
+    <script type="text/babel">
+      
+        class Person extends React.Component
+        {
+            state={
+                persons:[
+                    {id:1,name:"KD",age:30},
+                    {id:2,name:"MJ",age:50},
+                ]
+            }
+        
+
+        add=()=>{
+            const{persons}=this.state;
+            const newPerson={id:persons.length+1,name:"JR",age:27};
+            // add a new person at the top
+            this.setState({persons:[newPerson,...persons]});
+        }
+
+        render()
+        {
+            return(
+                <div>
+                    <h2>Display</h2>
+                    <button onClick={this.add}>add a person</button>
+                    {/*this method can incur problem*/}
+                    <h3>Method1:use index as the key(bad example)</h3>
+                    <ul>
+                        {
+                            this.state.persons.map((personObj,index)=>
+                            {
+                                return <li key={index}>{personObj.name}
+                                ---{personObj.age}
+                                <input type="text"/></li>
+                            })
+                        }
+                    </ul>
+                    <br/>
+                    <h3>Method2:use id as the key</h3>
+                    <ul>
+                        {
+                            this.state.persons.map((personObj,index)=>
+                            {
+                                return <li key={personObj.id}>{personObj.name}
+                                ---{personObj.age}
+                                <input type="text"/></li>
+                            })
+                        }
+                    </ul>
+
+                </div>
+            )
+        }
+
+        }
+
+        ReactDOM.render(<Person/>,document.getElementById("test"));
+
+    </script>
+</body>
+</html>
