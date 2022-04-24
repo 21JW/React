@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './index.css'
+
 
 export default class ChooseBox extends Component {
   render() {
