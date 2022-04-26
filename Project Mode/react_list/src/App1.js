@@ -16,22 +16,19 @@ export default class App extends Component{
   ]}
 
   addItem=(newItem)=>{
-    // get the current state of assignment, the name of it doesn't matter, it is ok to set it as A
-    const A=this.state.assignment
-    // add the newItem to A
-    const newAssignment=[newItem,...A]
-    // update the assignment
-    this.setState({assignment:newAssignment})
+    const Assignment=this.state.Assignment;
+    const newAssignment=[newItem,...Assignment]
+    this.setState({Assignment:newAssignment})
   }
 
   render(){
 
-    // const {assignment}=this.state
+    const {assignment}=this.state
     return(
       <div className="todo-container">
         <div className="todo-wrap">
-          <Head addItem={this.addItem}/>
-          <List Assignment={this.state.assignment}/>
+          <Head AddItem={this.addItem}/>
+          <List Assignment={assignment}/>
           <ChooseBox/>
         </div>
       </div>

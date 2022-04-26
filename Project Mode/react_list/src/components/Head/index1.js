@@ -6,17 +6,9 @@ export default class Head extends Component {
 
   handleKeyUp=(event)=>{
     // if it is not "Enter"(its keyCode is 13), do not submit 
-    if(event.keyCode!==13) return
-    if(event.target.value.trim()==='')
-    {
-      alert("Name is not allowed to be empty")
-      return
-    }
-    // create an obj that contains all required information
+    if(event.keyCode!=13) return
     const newItem={id:nanoid(),name:event.target.value,done:false}
     this.props.addItem(newItem)
-    // clear the name before
-    event.target.value='';
   }
 
   render() {
