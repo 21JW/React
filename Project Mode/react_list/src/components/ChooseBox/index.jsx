@@ -12,7 +12,7 @@ export default class ChooseBox extends Component {
         <span>
           <span>Complete 0</span>/ All 2
         </span>
-        <button className="btn-delete">Delete all completed assignments</button>
+        <button className="btn btn-delete">Delete all completed assignments</button>
         </div>
     );
   }

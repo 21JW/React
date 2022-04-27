@@ -24,6 +24,16 @@ export default class App extends Component{
     this.setState({assignment:newAssignment})
   }
 
+  updateAssignment=(id,done)=>{
+    // get the current state of assignment
+    const{assignment}=this.state;
+    const newAssignment=assignment.map((obj)=>{
+      if(obj.id===id) return{...obj,done}
+      else return obj
+    })
+    this.setState({assignment:newAssignment})
+  }
+
   render(){
 
     // const {assignment}=this.state
@@ -31,7 +41,7 @@ export default class App extends Component{
       <div className="todo-container">
         <div className="todo-wrap">
           <Head addItem={this.addItem}/>
-          <List Assignment={this.state.assignment}/>
+          <List Assignment={this.state.assignment} updateAssignment={this.updateAssignment}/>
           <ChooseBox/>
         </div>
       </div>
