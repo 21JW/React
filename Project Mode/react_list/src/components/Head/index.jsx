@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { nanoid } from 'nanoid'
 import './index.css'
 
 export default class Head extends Component {
 
+  static propTypes={
+    addItem:PropTypes.func.isRequired
+  }
+
+  // use addItem function provided in App to add a new Item
   handleKeyUp=(event)=>{
     // if it is not "Enter"(its keyCode is 13), do not submit 
     if(event.keyCode!==13) return

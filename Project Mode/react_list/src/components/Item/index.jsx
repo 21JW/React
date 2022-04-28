@@ -13,9 +13,17 @@ export default class Item extends Component {
     }
   }
 
+  // app provides a function to list. This function is given to Item to let app get checkbox status
   handleCheck=(id)=>{
     return (event)=>{
       this.props.updateAssignmentList(id,event.target.checked)
+    }
+  }
+
+  deleteItem=(id)=>{
+    return ()=>{
+      // alert('I am '+id);
+      this.props.deleteItemList(id);
     }
   }
 
@@ -27,7 +35,7 @@ export default class Item extends Component {
                 <span>{this.props.name}</span>
                 {/* get the names written in App*/}
             </label>
-            <button className='btn btn-Delete' style={{display:this.state.mouse?'block':'none'}}>Delete</button>
+            <button onClick={this.deleteItem(this.props.id)} className='btn btn-Delete' style={{display:this.state.mouse?'block':'none'}}>Delete</button>
         </li>
     );
   }
