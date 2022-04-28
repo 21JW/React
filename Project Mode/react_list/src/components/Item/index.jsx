@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import './index.css'
 
-
 export default class Item extends Component {
+
+  static propTypes={
+    updateAssignmentList:PropTypes.func.isRequired,
+    deleteItemList:PropTypes.func.isRequired,
+  }
+
   // state:mouse means whether mouse enter this item. the initial state is false
   state={mouse:false}
 
@@ -23,7 +29,10 @@ export default class Item extends Component {
   deleteItem=(id)=>{
     return ()=>{
       // alert('I am '+id);
-      this.props.deleteItemList(id);
+      if(window.confirm("Are you sure to delete this item?"))
+      {
+         this.props.deleteItemList(id);
+      }
     }
   }
 
@@ -31,7 +40,7 @@ export default class Item extends Component {
     return (
         <li style={{backgroundColor:this.state.mouse?'#ddd':'white'}} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
             <label>
-                <input type="checkbox" defaultChecked={this.props.done} onChange={this.handleCheck(this.props.id)}/>
+                <input type="checkbox" checked={this.props.done} onChange={this.handleCheck(this.props.id)}/>
                 <span>{this.props.name}</span>
                 {/* get the names written in App*/}
             </label>

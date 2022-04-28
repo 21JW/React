@@ -2,10 +2,11 @@ import React,{Component} from 'react'
 import './App.css'
 import Head from './components/Head'
 import List from './components/List'
-import ChooseBox from './components/ChooseBox'
+import CheckBox from './components/CheckBox'
 
 export default class App extends Component{
 
+  // initialize states
   state={assignment:[
     {id:'001',name:'Swimming',done:true},
     {id:'002',name:'Running',done:true},
@@ -23,7 +24,7 @@ export default class App extends Component{
      this.setState({assignment:newAssignment})
    }
 
-  // update the status of the checkbox
+  // update the status of the checkbox after states change
    updateAssignment=(id,done)=>{
     // get the current state of assignment
     const{assignment}=this.state;
@@ -48,6 +49,17 @@ export default class App extends Component{
     this.setState({assignment:newAssignment})
   }
 
+  // checked is a boolean provided by CheckBox
+  checkAllApp=(checked)=>{
+    // get the current state
+    const{assignment}=this.state
+    // change the done status
+    const newAssignment=assignment.map((obj)=>{
+      return{...obj,done:checked}
+    })
+    this.setState({assignment:newAssignment})
+  }
+
   render(){
 
     // const {assignment}=this.state
@@ -57,7 +69,8 @@ export default class App extends Component{
           <Head addItem={this.addItem}/>
           {/* assignment is a state updateAssignment is a function */}
           <List Assignment={this.state.assignment} updateAssignment={this.updateAssignment} deleteItemApp={this.deleteItemApp}/>
-          <ChooseBox/>
+          {/* provide the current state of assignment to let checkbox get the total number of assignments and done assignments*/}
+          <CheckBox Assignment={this.state.assignment} checkAllApp={this.checkAllApp}/>
         </div>
       </div>
     )
