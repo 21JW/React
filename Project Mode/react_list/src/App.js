@@ -60,6 +60,15 @@ export default class App extends Component{
     this.setState({assignment:newAssignment})
   }
 
+  deleteDoneItemsApp=()=>{
+    // get the current state
+    const{assignment}=this.state
+    const newAssignment=assignment.filter((obj)=>{
+      return obj.done===false
+    })
+    this.setState({assignment:newAssignment})
+  }
+
   render(){
 
     // const {assignment}=this.state
@@ -70,7 +79,7 @@ export default class App extends Component{
           {/* assignment is a state updateAssignment is a function */}
           <List Assignment={this.state.assignment} updateAssignment={this.updateAssignment} deleteItemApp={this.deleteItemApp}/>
           {/* provide the current state of assignment to let checkbox get the total number of assignments and done assignments*/}
-          <CheckBox Assignment={this.state.assignment} checkAllApp={this.checkAllApp}/>
+          <CheckBox Assignment={this.state.assignment} checkAllApp={this.checkAllApp} deleteDoneItemsApp={this.deleteDoneItemsApp}/>
         </div>
       </div>
     )

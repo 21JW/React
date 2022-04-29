@@ -9,6 +9,10 @@ export default class CheckBox extends Component {
     this.props.checkAllApp(event.target.checked);
   }
 
+  deleteDoneItems=()=>{
+    this.props.deleteDoneItemsApp();
+  }
+
   render() {
     const{Assignment}=this.props
     // Assignment is an array, TotalNum is the total number of tha array
@@ -24,7 +28,7 @@ export default class CheckBox extends Component {
         <span>
           <span>Complete {doneCount}</span>/ All {TotalNum}
         </span>
-        <button className="btn btn-delete">Delete all completed assignments</button>
+        <button onClick={this.deleteDoneItems} className="btn btn-delete">Delete all completed assignments</button>
         </div>
     );
   }
