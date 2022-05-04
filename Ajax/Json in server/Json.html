@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajax Get Request</title>
+    <title>Json</title>
     <style>
         #result{
             width: 200px;
@@ -14,17 +14,19 @@
     </style>
 </head>
 <body>
-    <button id="btn01">Send Requests</button>
     <div id="result"></div>
     <script>
-        // get button
-        const btn01=document.getElementById("btn01");
-        btn01.onclick=function(){
+        const result=document.getElementById("result");
+        // when a key down, this function is activated
+        window.onkeydown=function(){
             // create XMLHttpRequest
             const xhr=new XMLHttpRequest();
+            // set response type as json
+            xhr.responseType='json';
+
             // initialize request method and url
             // provide data to server
-            xhr.open('GET','http://127.0.0.1:8000/server?a=100&b=200&c=300');
+            xhr.open('GET','http://127.0.0.1:8000/json-server');
             // send
             xhr.send();
             // handle what server replies
@@ -36,11 +38,14 @@
                     // judge status: 2xx is good 
                     if(xhr.status>=200 && xhr.status<300)
                     {
-                        console.log(xhr.status);
-                        console.log(xhr.statusText);
-                        console.log(xhr.getAllResponseHeaders());
-                        console.log(xhr.response);
-                        result.innerHTML=xhr.response;
+                        // two ways to transform Json
+                        // 1.manual method
+                        // let data=JSON.parse(xhr.response);
+                        // result.innerHTML=data.name;
+
+                        // 2.auto transform
+                        // xhr.responseType='json'; is the key
+                        result.innerHTML=xhr.response.name;
                     }
                 }
             }

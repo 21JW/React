@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajax Get Request</title>
+    <title>Ajax Post Request</title>
     <style>
         #result{
             width: 200px;
@@ -14,19 +14,26 @@
     </style>
 </head>
 <body>
-    <button id="btn01">Send Requests</button>
     <div id="result"></div>
     <script>
         // get button
-        const btn01=document.getElementById("btn01");
-        btn01.onclick=function(){
+        const result=document.getElementById("result");
+
+        result.addEventListener("mouseover",function()
+        {
+
             // create XMLHttpRequest
             const xhr=new XMLHttpRequest();
             // initialize request method and url
-            // provide data to server
-            xhr.open('GET','http://127.0.0.1:8000/server?a=100&b=200&c=300');
-            // send
-            xhr.send();
+            xhr.open('POST','http://127.0.0.1:8000/server');
+            // set RequestHeader
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.setRequestHeader('name','JR');
+            // send information to server
+            xhr.send('a=100&b=200&c=300');
+            // another way
+            // xhr.send('a:100&b:200&c:300');
+
             // handle what server replies
             // readystate: 0:not initialized 1:open is already 2.send is already 3.server replies some of the results 4. server replies all results
             xhr.onreadystatechange=function(){
@@ -36,16 +43,17 @@
                     // judge status: 2xx is good 
                     if(xhr.status>=200 && xhr.status<300)
                     {
-                        console.log(xhr.status);
-                        console.log(xhr.statusText);
-                        console.log(xhr.getAllResponseHeaders());
-                        console.log(xhr.response);
+                        // console.log(xhr.status);
+                        // console.log(xhr.statusText);
+                        // console.log(xhr.getAllResponseHeaders());
+                        // console.log(xhr.response);
                         result.innerHTML=xhr.response;
                     }
                 }
             }
+        });
+        
 
-        }
     </script>
 </body>
 </html>

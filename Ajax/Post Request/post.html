@@ -27,8 +27,11 @@
             const xhr=new XMLHttpRequest();
             // initialize request method and url
             xhr.open('POST','http://127.0.0.1:8000/server');
-            // send
-            xhr.send();
+            // send information to server
+            xhr.send('a=100&b=200&c=300');
+            // another way
+            // xhr.send('a:100&b:200&c:300');
+
             // handle what server replies
             // readystate: 0:not initialized 1:open is already 2.send is already 3.server replies some of the results 4. server replies all results
             xhr.onreadystatechange=function(){
