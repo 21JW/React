@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Ajax request</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">jQuery Ajax Request</h2>
+        <button class="btn btn-get">Get</button>
+        <button class="btn btn-post">Post</button>
+    </div>
+    <script>
+        // eq(0): the first button
+        // "json" returns an object
+        $('button').eq(0).click(function(){
+            $.get('http://127.0.0.1:8000/jquery-server',{a:100,b:200},function(data){
+                console.log(data);
+            },'json');
+        })
+
+        // eq(1) the second button
+        // returns a string
+        $('button').eq(1).click(function(){
+            $.post('http://127.0.0.1:8000/jquery-server',{a:100,b:200},function(data){
+                console.log(data);
+            });
+        })
+
+    </script>
+
+</body>
+</html>

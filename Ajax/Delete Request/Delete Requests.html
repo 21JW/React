@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Requests</title>
+    <style>
+        #result{
+            width: 200px;
+            height: 100px;
+            border: solid 1px #90b;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn01">Send Requests</button>
+    <button id="btn02">Delete Requests</button>
+
+    <div id="result"></div>
+    <script>
+        // get button
+        const btn01=document.getElementById("btn01");
+        const btn02=document.getElementById("btn02");
+
+        let xhr=null;
+
+        btn01.onclick=function()
+        {
+            // create XMLHttpRequest
+            xhr=new XMLHttpRequest();
+
+            // if delay time is over 2s,delay function executes
+            xhr.timeout=3000;
+            xhr.ontimeout=function(){
+                alert('Time-out Error.Please try again!')
+            }
+
+            // initialize request method and url
+            // provide data to server
+            xhr.open('GET','http://127.0.0.1:8000/delay');
+            // send
+            xhr.send();
+            // handle what server replies
+            // readystate: 0:not initialized 1:open is already 2.send is already 3.server replies some of the results 4. server replies all results
+            xhr.onreadystatechange=function(){
+                // judge whether all results are sent
+                if(xhr.readyState===4)
+                {
+                    // judge status: 2xx is good 
+                    if(xhr.status>=200 && xhr.status<300)
+                    {
+                        result.innerHTML=xhr.response;
+                    }
+                }
+            }
+        }
+
+        // delete requests
+        btn02.onclick=function(){
+            xhr.abort();
+        }
+
+    </script>
+</body>
+</html>
