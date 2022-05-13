@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1=Promise.reject(123);
+        p1.catch(reason=>{
+            console.log(reason);
+            // 123
+        })
+        console.log(p1);
+        // p1 is an obj. promisestate is 'rejected' and promiseresult is "123"
+        let p2=Promise.reject(new Promise((resolve,reject)=>{
+            resolve("It is good");
+        }));
+        p2.catch(reason=>{
+            console.log(reason);
+            // reason is an obj promisestate is fulfilled and promiseresult is "It is good"
+        })
+        console.log(p2);
+        // p2 is an obj promisestate is rejected and promiseresult is an promise obj
+
+    </script>
+    
+</body>
+</html>
