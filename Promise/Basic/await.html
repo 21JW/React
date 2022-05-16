@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function main1()
+        {
+            let p=new Promise((resolve,reject)=>{
+                resolve('OK');
+            })
+            let result1=await p;
+            console.log(result1);
+            // OK
+            
+            let result2=123;
+            console.log(result2);
+            // 123
+
+        }
+    
+        main1();
+
+        async function main2()
+        {
+            let p=new Promise((resolve,reject)=>{
+                reject('Error');
+            })
+
+            try{
+                let result3=await p;
+            }catch(e){
+                console.log(e);
+                // Error
+            }
+
+        }
+    
+        main2();
+
+    </script>
+    
+</body>
+</html>
