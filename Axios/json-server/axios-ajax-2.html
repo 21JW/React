@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <button>Send GET Request</button>
+        <button>Send POST Request</button>
+        <button>Send PUT Request</button>
+        <button>Send DELETE Request</button>
+    </div>
+    <script>
+        const btn=document.querySelectorAll('button');
+
+        // get info
+        btn[0].onclick=function()
+        {
+            axios.request({
+                method:'GET',
+                url:'http://localhost:3000/posts/2'
+            }).then(response=>{
+                console.log(response);
+            })
+        }
+
+        // add info
+        btn[1].onclick=function()
+        {
+            axios.post(
+                'http://localhost:3000/comments',
+                {
+                    "body":"Mavericks is great",
+                    "postId":2
+                }
+            ).then(response=>{
+                console.log(response);
+            })
+        }
+
+    </script>
+</body>
+</html>
